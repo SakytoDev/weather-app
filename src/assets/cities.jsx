@@ -10,5 +10,13 @@ export const cities = [
     {
         city: 'Warsaw',
         local: 'Варшава'
+    },
+    {
+        city: 'Chicago',
+        local: 'Чикаго'
+    },
+    {
+        city: 'Paris',
+        local: 'Париж'
     }
 ]
