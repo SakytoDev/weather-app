@@ -28,7 +28,7 @@ export default function Dropdown({ items, onChange }) {
         <p className='text-left'>{items[index]}</p>
         <img className={`w-8 h-8 ml-auto transition ease-in-out duration-300 ${isShown ? 'rotate-[-90deg]' : 'rotate-90'}`} src={arrow}/>
       </div>
-      <div className={`mt-2 bg-zinc-600 overflow-y-auto transition-all ease-in-out duration-300 ${isShown ? 'max-h-[240px]' : 'max-h-0'} absolute left-0 right-0 grid`}>
+      <div className={`mt-2 -m-[2px] border-2 border-t-0 rounded-b bg-zinc-600 overflow-y-auto transition-all ease-in-out duration-300 ${isShown ? 'max-h-[240px]' : 'max-h-0'} absolute left-0 right-0 grid`}>
         { items?.map((item, index) => {
           return <DropdownItem key={index} item={item} index={index} onSelect={onSelect}/>
         })}
