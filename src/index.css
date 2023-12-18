@@ -1,4 +1,8 @@
-body {
-  margin: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  margin: 0 !important;
   height: 100%;
 }
