@@ -105,7 +105,10 @@ function App() {
               <button className='p-2 border-2 border-indigo-500 rounded text-white font-medium transition ease-in-out hover:bg-indigo-600' onClick={() => getWeather()}>Посмотреть погоду</button>
             </div>
             :
-            <WeatherCard weather={weather}/>
+            <div className='flex flex-col gap-2'>
+              <WeatherCard weather={weather}/>
+              <button className='p-2 border-2 border-indigo-500 rounded text-white font-medium transition ease-in-out hover:bg-indigo-600' onClick={() => setWeather(null)}>Сменить погоду</button>
+            </div>
             }
           </div>
         </div>
