@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import carouselArrow from '../assets/carouselArrow.png';
@@ -20,6 +20,10 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
 
     setIndex((curr) => curr + 1)
   }
+
+  useEffect(() => {
+    setIndex(0)
+  }, [slides])
 
   return (
     <div className={`relative ${className}`}>
