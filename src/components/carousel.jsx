@@ -27,11 +27,11 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
 
   return (
     <div className={`relative ${className}`}>
-      <div className='grid grid-cols-3 items-center gap-2'>
-        <AnimatePresence>
+      <div className={`grid grid-cols-3 items-center justify-center gap-2`}>
+        <AnimatePresence mode='wait'>
           { slides?.map((item, i) => {
             if (i < maxSlides + index && i >= 0 + index) {
-              return <ForecastCard key={i} weather={item} index={i} setWeatherIndex={setWeatherIndex}/>
+              return <ForecastCard key={i} weather={item} index={i} setWeatherIndex={setWeatherIndex} delay={i * 0.1}/>
             }
           })}
         </AnimatePresence>
