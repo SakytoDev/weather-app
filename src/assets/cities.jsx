@@ -18,5 +18,9 @@ export const cities = [
     {
         city: 'Paris',
         local: 'Париж'
+    },
+    {
+        city: 'Tokio',
+        local: 'Токио'
     }
 ]
