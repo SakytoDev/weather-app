@@ -1,38 +1,55 @@
 import { useState, useEffect } from 'react';
 
 import arrow from '../assets/arrow.png';
+import info from '../assets/info.png';
 
-function DropdownItem({ item, index, onSelect }) {
+function DropdownItem({ item, onSelect }) {
   return (
-    <a className='p-2 bg-zinc-700 text-left transition ease-in-out hover:bg-opacity-50' onClick={() => onSelect(index)}>{item}</a>
+    <button className='p-2 bg-zinc-700 text-left outline-none transition ease-in-out hover:bg-opacity-50' onClick={() => onSelect(item)}>{item.local}</button>
   )
 }
 
-export default function Dropdown({ items, onChange }) {
+export default function Dropdown({ items, location, getLocation, onChange }) {
   const [isShown, setShow] = useState(false)
-  const [index, setIndex] = useState(0)
+  const [current, setCurrent] = useState('')
 
-  function onSelect(index) {
-    setIndex(index)
+  function onSelect(item) {
+    setCurrent(item)
 
-    onChange(items[index])
+    onChange(item)
   }
 
   useEffect(() => {
-    onChange(items[index])
+    onChange(items)
   }, [])
 
   return (
-    <button className={`relative p-2 bg-zinc-600 border-2 rounded transition-all ease-in-out ${isShown ? 'rounded-b-none' : ''} text-white font-medium`} onClick={() => setShow((prev) => !prev)}>
+    <a className={`relative p-2 bg-zinc-600 border-2 rounded-xl transition-all ease-in-out duration-300 ${isShown ? 'rounded-b-none' : ''} text-white font-medium`} onClick={() => setShow((prev) => !prev)}>
       <div className='flex items-center'>
-        <p className='text-left'>{items[index]}</p>
+        <p className='text-left'>{current.local}</p>
         <img className={`w-8 h-8 ml-auto transition ease-in-out duration-300 ${isShown ? 'rotate-[-90deg]' : 'rotate-90'}`} src={arrow}/>
       </div>
-      <div className={`mt-2 -m-[2px] border-2 border-t-0 rounded-b bg-zinc-600 overflow-y-auto transition-all ease-in-out duration-300 ${isShown ? 'max-h-[240px]' : 'max-h-0'} absolute left-0 right-0 grid`}>
-        { items?.map((item, index) => {
-          return <DropdownItem key={index} item={item} index={index} onSelect={onSelect}/>
-        })}
+      <div className={`mt-2 -m-[2px] border-2 border-t-0 rounded-b bg-zinc-600 overflow-y-auto transition-all ease-in-out duration-300 ${isShown ? 'max-h-[240px]' : 'max-h-0 border-b-0'} absolute left-0 right-0 grid`}>
+        <div className='grid'>
+          <p className='px-2 py-1 text-center'>Ваше местоположение</p>
+          { !location.error 
+          ? <DropdownItem item={{ city: 'userLocation', local: 'Использовать моё местоположение' }} onSelect={onSelect}/>
+          :
+          <div className='p-2 bg-zinc-700 flex items-center gap-1'>
+            <img className='w-8 h-8' src={info}/>
+            <button className={`text-left text-sm ${!location.disabled ? 'text-blue-300 underline' : ''}`} onClick={getLocation} disabled={location.disabled}>{location.error}</button>
+          </div>
+          }
+        </div>
+        <div className='grid'>
+          <p className='px-2 py-1 text-center'>Другие варианты</p>
+          { items.map((item, index) => {
+            if (!item.isUserLocation) {
+              return <DropdownItem key={index} item={item} onSelect={onSelect}/>
+            }
+          })}
+        </div>
       </div>
-    </button>
+    </a>
   )
 }
