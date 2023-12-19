@@ -1,26 +1,22 @@
 export const cities = [
     {
-        city: 'Moscow',
-        local: 'Москва'
+        city: 'Москва',
+        location: [55.755864, 37.617698]
     },
     {
-        city: 'Samara',
-        local: 'Самара'
+        city: 'Самара',
+        location: [53.195878, 50.100202]
     },
     {
-        city: 'Warsaw',
-        local: 'Варшава'
+        city: 'Чапаевск',
+        location: [52.981709, 49.710217]
     },
     {
-        city: 'Chicago',
-        local: 'Чикаго'
+        city: 'Казань',
+        location: [55.796092, 49.106180]
     },
     {
-        city: 'Paris',
-        local: 'Париж'
-    },
-    {
-        city: 'Tokio',
-        local: 'Токио'
+        city: 'Новокуйбышевск',
+        location: [53.099469, 49.947776]
     }
 ]
