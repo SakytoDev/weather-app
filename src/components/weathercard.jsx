@@ -1,8 +1,14 @@
 import pressure from '../assets/pressure.png';
 import humidity from '../assets/humidity.png';
 import wind from '../assets/wind.png';
+import arrow from '../assets/windArrow.png';
 
 export default function WeatherCard({ weather, index }) {
+  function degreesToText(degree) {
+    const degArr = ['С', 'ССВ', 'СВ', 'ВСВ', 'В', 'ВЮВ', 'ЮВ', 'ЮЮВ', 'Ю', 'ЮЮЗ', 'ЮЗ', 'ЗЮЗ', 'З', 'ЗСЗ', 'СЗ', 'ССЗ']
+    return degArr[((degree / 22.5) + 0.5).toFixed()]
+  }
+
   return (
     <div className='grid grid-rows-[auto,auto,auto]'>
       <div className='py-2 border-2 rounded-t-xl flex flex-col items-center'>
@@ -33,6 +39,10 @@ export default function WeatherCard({ weather, index }) {
           <img className='w-7 h-7' src={wind}/>
           <div>
             <p>{(weather.daily[index].wind_speed).toFixed(1)} м/с</p>
+            <div className='flex items-center gap-1'>
+              <p>{degreesToText(weather.daily[index].wind_deg)}</p>
+              <img className='w-4 h-4' style={{ transform: `rotate(${weather.daily[index].wind_deg}deg)` }} src={arrow}/>
+            </div>
           </div>
         </div>
       </div>
