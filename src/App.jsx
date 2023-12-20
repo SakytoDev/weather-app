@@ -51,7 +51,7 @@ function App() {
       .catch((err) => console.log(err))
 
       // Получение прогноза на 7 дней
-      const weather = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${city.location[0]}&lon=${city.location[1]}&exclude=minutely,hourly,alerts&appid=${import.meta.env.VITE_API_KEY}&lang=ru`)
+      const weather = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${city.location[0]}&lon=${city.location[1]}&exclude=minutely,hourly,alerts&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=ru`)
       .then((res) => { return res.data })
       .catch((err) => console.log(err))
 
