@@ -60,7 +60,7 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
             const dotArr = []
 
             for (let i = 0; i < slides.length - maxSlides + 1; i++) {
-              dotArr.push(<button key={i} className={`bg-white transition-all ease-in-out ${i == index ? 'w-4 h-4 opacity-100' : 'w-2 h-2 opacity-50'} rounded-full`} onClick={() => setIndex(i)}></button>)
+              dotArr.push(<button key={i} className={`bg-white transition-all ease-in-out ${i == index ? 'w-4 h-4 bg-blue-300 opacity-100' : 'w-2 h-2 bg-white opacity-50'} rounded-full`} onClick={() => setIndex(i)}></button>)
             }
 
             return dotArr
