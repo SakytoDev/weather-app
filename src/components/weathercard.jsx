@@ -6,7 +6,8 @@ import arrow from '../assets/windArrow.png';
 export default function WeatherCard({ weather, index }) {
   function degreesToText(degree) {
     const degArr = ['С', 'ССВ', 'СВ', 'ВСВ', 'В', 'ВЮВ', 'ЮВ', 'ЮЮВ', 'Ю', 'ЮЮЗ', 'ЮЗ', 'ЗЮЗ', 'З', 'ЗСЗ', 'СЗ', 'ССЗ']
-    return degArr[((degree / 22.5) + 0.5).toFixed()]
+
+    return degArr[((degree / 22.5) - 0.5).toFixed()]
   }
 
   return (
