@@ -53,6 +53,19 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
         <button className={`${index > 0 ? 'visible' : 'invisible'}`} onClick={() => leftButton()}><img className='w-8 h-8 rotate-180 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
         <button className={`${index < slides?.length - maxSlides ? 'visible' : 'invisible'}`} onClick={() => rightButton()}><img className='w-8 h-8 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
       </div>
+      <div className='absolute inset-0 flex items-end justify-center'>
+        <div className='flex items-center gap-2'>
+          {(() => {
+            const dotArr = []
+
+            for (let i = 0; i < slides.length - maxSlides + 1; i++) {
+              dotArr.push(<button className={`bg-white transition-all ease-in-out ${i == index ? 'w-4 h-4 opacity-100' : 'w-2 h-2 opacity-50'} rounded-full`} onClick={() => setIndex(i)}></button>)
+            }
+
+            return dotArr
+          })()}
+        </div>
+      </div>
     </div>
   )
 }
