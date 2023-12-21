@@ -53,8 +53,9 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
         <button className={`${index > 0 ? 'visible' : 'invisible'}`} onClick={() => leftButton()}><img className='w-8 h-8 rotate-180 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
         <button className={`${index < slides?.length - maxSlides ? 'visible' : 'invisible'}`} onClick={() => rightButton()}><img className='w-8 h-8 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
       </div>
-      <div className='absolute inset-0 flex items-end justify-center'>
-        <div className='flex items-center gap-2'>
+      <div className='absolute inset-0 flex items-end justify-center invisible'>
+        { slides ?
+        <div className='flex items-center gap-2 visible'>
           {(() => {
             const dotArr = []
 
@@ -65,6 +66,7 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
             return dotArr
           })()}
         </div>
+        : null }
       </div>
     </div>
   )
