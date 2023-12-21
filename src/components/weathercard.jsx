@@ -25,8 +25,8 @@ export default function WeatherCard({ weather, index }) {
         </div>
       </div>
       <div>
-        <p className='mt-2 border-l-2 border-r-2 text-white text-center text-5xl font-bold'>{(weather.daily[0].temp.day).toFixed()}°C</p>
-        <p className='mb-2 border-l-2 border-r-2 text-white text-center'>По ощущениям: {(weather.daily[0].feels_like.day).toFixed()}°C</p>
+        <p className='mt-2 border-l-2 border-r-2 text-white text-center text-5xl font-bold'>{(weather.daily[index].temp.day).toFixed()}°C</p>
+        <p className='mb-2 border-l-2 border-r-2 text-white text-center'>По ощущениям: {(weather.daily[index].feels_like.day).toFixed()}°C</p>
       </div>
       <div className='border-t-2 grid grid-cols-2'>
         <div className='pl-2 border-2 border-t-0 rounded-bl-xl text-white font-medium flex flex-col justify-center'>
