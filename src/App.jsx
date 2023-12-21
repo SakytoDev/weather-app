@@ -17,7 +17,7 @@ function App() {
   const [index, setWeatherIndex] = useState(0)
 
   const [location, setLocation] = useState({ error: 'Разрешить использовать своё местоположение', disabled: false })
-  const [city, setCity] = useState('')
+  const [city, setCity] = useState(null)
 
   const [loading, setLoad] = useState(false)
 
@@ -42,7 +42,7 @@ function App() {
   }
 
   async function getWeather() {
-    if (city) {
+    if (city?.location) {
       setLoad(true)
 
       // Получение данных о локации
@@ -86,7 +86,7 @@ function App() {
               <div className='flex flex-col justify-center gap-2'>
                 <p className='mb-2 text-white text-center text-xl font-bold'>Выбор города:</p>
                 <Dropdown items={cities} location={location} getLocation={getLocation} onChange={handleChange}/>
-                <button className='p-2 border-2 border-indigo-500 rounded text-white font-medium transition ease-in-out hover:bg-indigo-600' onClick={() => getWeather()}>Посмотреть погоду</button>
+                <button className='p-2 border-2 border-indigo-500 rounded text-white font-medium transition ease-in-out disabled:border-gray-500 enabled:hover:bg-indigo-600' disabled={!city?.location} onClick={() => getWeather()}>{ !city?.location ? 'Вы не выбрали город' : 'Посмотреть погоду' }</button>
               </div>
               :
               <div className='flex flex-col gap-2'>
