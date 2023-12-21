@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 import carouselArrow from '../assets/carouselArrow.png';
 
 import ForecastCard from './forecastcard.jsx';
 
-export default function Carousel({ slides, setWeatherIndex, className }) {
+export default function Carousel({ slides, weatherIndex, setWeatherIndex, className }) {
   const [index, setIndex] = useState(0)
   const [maxSlides, setMaxSlides] = useState(1)
 
@@ -18,16 +19,25 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
     if (width < 768) setMaxSlides(1)
   }
 
-  const leftButton = () => {
+  const handleLeftSwipe = () => {
     if (index <= 0) return
 
     setIndex((curr) => curr - 1)
+
+    if (maxSlides == 1) setWeatherIndex(index - 1)
   }
 
-  const rightButton = () => {
+  const handleRightSwipe = () => {
     if (index >= slides.length - maxSlides) return
 
     setIndex((curr) => curr + 1)
+
+    if (maxSlides == 1) setWeatherIndex(index + 1)
+  }
+
+  const handleDragEnd = (event, info) => {
+    if (info.offset.x >= 100 && index > 0) handleLeftSwipe()
+    if (info.offset.x < -100 && index < slides.length - maxSlides) handleRightSwipe()
   }
 
   useEffect(() => {
@@ -42,16 +52,16 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
 
   return (
     <div className={`relative ${className}`}>
-      <div className={`grid grid-cols-${maxSlides} grid-flow-col auto-cols-fr items-center gap-x-2`}>
+      <motion.div className={`grid grid-cols-${maxSlides} grid-flow-col auto-cols-fr items-center gap-x-2`} drag='x' dragConstraints={{ left: -50, right: 50 }} dragSnapToOrigin onDragEnd={handleDragEnd}>
         { slides?.map((item, i) => {
           if (i < maxSlides + index && i >= 0 + index) {
-            return <ForecastCard key={i} weather={item} index={i} setWeatherIndex={setWeatherIndex} delay={i * 0.1}/>
+            return <ForecastCard key={i} weather={item} index={i} setWeatherIndex={setWeatherIndex} delay={i * 0.1} className={`${i == weatherIndex ? 'border-blue-500' : 'border-white'}`}/>
           }
         })}
-      </div>
+      </motion.div>
       <div className='-mx-2 absolute inset-0 flex items-center justify-between invisible'>
-        <button className={`${index > 0 ? 'visible' : 'invisible'}`} onClick={() => leftButton()}><img className='w-8 h-8 rotate-180 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
-        <button className={`${index < slides?.length - maxSlides ? 'visible' : 'invisible'}`} onClick={() => rightButton()}><img className='w-8 h-8 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
+        <button className={`${index > 0 ? 'visible' : 'invisible'}`} onClick={() => handleLeftSwipe()}><img className='w-8 h-8 rotate-180 transition ease-in-out hover:scale-110 ' src={carouselArrow}/></button>
+        <button className={`${index < slides?.length - maxSlides ? 'visible' : 'invisible'}`} onClick={() => handleRightSwipe()}><img className='w-8 h-8 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
       </div>
       <div className='absolute inset-0 flex items-end justify-center invisible'>
         { slides ?

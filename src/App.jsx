@@ -98,7 +98,7 @@ function App() {
             }
           </div>
         </motion.div>
-        <Carousel slides={weather?.daily} setWeatherIndex={setWeatherIndex} className='m-5 grid col-span-3'/>
+        <Carousel slides={weather?.daily} weatherIndex={index} setWeatherIndex={setWeatherIndex} className='m-5 grid col-span-3'/>
       </div>
     </>
   )
