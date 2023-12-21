@@ -6,7 +6,17 @@ import ForecastCard from './forecastcard.jsx';
 
 export default function Carousel({ slides, setWeatherIndex, className }) {
   const [index, setIndex] = useState(0)
-  const maxSlides = 4
+  const [maxSlides, setMaxSlides] = useState(1)
+
+  function returnMaxSlides() {
+    const width = window.innerWidth
+
+    if (width >= 1536) setMaxSlides(5)
+    if (width < 1536 && width >= 1280) setMaxSlides(4)
+    if (width < 1280 && width >= 1024) setMaxSlides(3)
+    if (width < 1024 && width >= 768) setMaxSlides(2)
+    if (width < 768) setMaxSlides(1)
+  }
 
   const leftButton = () => {
     if (index <= 0) return
@@ -22,11 +32,17 @@ export default function Carousel({ slides, setWeatherIndex, className }) {
 
   useEffect(() => {
     setIndex(0)
+
+    returnMaxSlides()
   }, [slides])
+
+  useEffect(() => {
+    window.addEventListener("resize", returnMaxSlides)
+  }, [])
 
   return (
     <div className={`relative ${className}`}>
-      <div className={`grid grid-cols-4 items-center justify-center gap-2`}>
+      <div className={`grid grid-cols-${maxSlides} grid-flow-col auto-cols-fr items-center gap-x-2`}>
         { slides?.map((item, i) => {
           if (i < maxSlides + index && i >= 0 + index) {
             return <ForecastCard key={i} weather={item} index={i} setWeatherIndex={setWeatherIndex} delay={i * 0.1}/>

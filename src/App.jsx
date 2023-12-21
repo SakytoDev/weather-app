@@ -70,8 +70,8 @@ function App() {
     <>
       <img className='bg-zinc-800 absolute h-full w-full object-cover blur -z-[1]' src={bg}/>
 
-      <div className='min-h-screen grid grid-rows-[auto,auto,auto] grid-cols-3'>
-        <motion.div className='h-fit m-5 col-start-2' layout>
+      <div className='h-full grid grid-rows-[auto,auto] grid-cols-3'>
+        <motion.div className='h-fit m-5 col-span-3 lg:col-start-2 lg:col-span-1' layout>
           <div className='p-5 bg-zinc-700 border-2 rounded-xl'>
             { loading 
             ?
@@ -98,7 +98,7 @@ function App() {
             }
           </div>
         </motion.div>
-        <Carousel slides={weather?.daily} setWeatherIndex={setWeatherIndex} className='m-5 grid row-start-3 col-span-3'/>
+        <Carousel slides={weather?.daily} setWeatherIndex={setWeatherIndex} className='m-5 grid col-span-3'/>
       </div>
     </>
   )

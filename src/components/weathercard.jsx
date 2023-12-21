@@ -12,7 +12,7 @@ export default function WeatherCard({ weather, index }) {
   return (
     <div className='grid grid-rows-[auto,auto,auto]'>
       <div className='py-2 border-2 rounded-t-xl flex flex-col items-center'>
-        <p className='text-white text-5xl font-bold font-mono'>{weather.name}</p>
+        <p className='text-white font-bold font-mono text-3xl sm:text-4xl md:text-5xl lg:text-4xl 2xl:text-5xl'>{weather.name}</p>
         <div className='flex items-center gap-2'>
           <div className='bg-zinc-400 rounded-full'>
             <img className='w-7 h-7' src={`https://openweathermap.org/img/wn/${weather.daily[index].weather[0].icon}.png`}/>
