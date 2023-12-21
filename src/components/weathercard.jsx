@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 import pressure from '../assets/pressure.png';
 import humidity from '../assets/humidity.png';
 import wind from '../assets/wind.png';
@@ -11,14 +13,15 @@ export default function WeatherCard({ weather, index }) {
   }
 
   return (
-    <div className='grid grid-rows-[auto,auto,auto]'>
+    <div className='grid grid-rows-[auto,auto,auto,auto]'>
       <div className='py-2 border-2 rounded-t-xl flex flex-col items-center'>
         <p className='text-white font-bold font-mono text-3xl sm:text-4xl md:text-5xl lg:text-4xl 2xl:text-5xl'>{weather.name}</p>
-        <div className='flex items-center gap-2'>
-          <div className='bg-zinc-400 rounded-full'>
-            <img className='w-7 h-7' src={`https://openweathermap.org/img/wn/${weather.daily[index].weather[0].icon}.png`}/>
+        <div className='flex flex-col items-center gap-1'>
+          <p className='text-white text-xl'>{DateTime.fromSeconds(weather.daily[index].dt).setLocale('ru').toFormat('cccc')}</p>
+          <div className='flex gap-2'>
+            <img className='bg-zinc-400 rounded-full w-7 h-7' src={`https://openweathermap.org/img/wn/${weather.daily[index].weather[0].icon}.png`}/>
+            <p className='text-white text-xl font-mono'>{weather.daily[index].weather[0].description}</p>
           </div>
-          <p className='text-white text-xl font-mono'>{weather.daily[index].weather[0].description}</p>
         </div>
       </div>
       <div>
