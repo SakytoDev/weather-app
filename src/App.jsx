@@ -66,6 +66,11 @@ function App() {
     }
   }
 
+  function changeCity() {
+    setWeatherIndex(0)
+    setWeather(null)
+  }
+
   return (
     <>
       <img className='bg-zinc-800 absolute h-full w-full object-cover blur -z-[1]' src={bg}/>
@@ -91,7 +96,7 @@ function App() {
               :
               <div className='flex flex-col gap-2'>
                 <WeatherCard weather={weather} index={index}/>
-                <button className='p-2 border-2 border-indigo-500 rounded text-white font-medium transition ease-in-out hover:bg-indigo-600' onClick={() => setWeather(null)}>Сменить город</button>
+                <button className='p-2 border-2 border-indigo-500 rounded text-white font-medium transition ease-in-out hover:bg-indigo-600' onClick={() => changeCity()}>Сменить город</button>
               </div>
               }
             </div> 
