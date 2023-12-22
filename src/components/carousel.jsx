@@ -35,6 +35,12 @@ export default function Carousel({ slides, weatherIndex, setWeatherIndex, classN
     if (maxSlides == 1) setWeatherIndex(index + 1)
   }
 
+  const handleDotSwipe = (index) => {
+    setIndex(index)
+
+    if (maxSlides == 1) setWeatherIndex(index)
+  }
+
   const handleDragEnd = (event, info) => {
     if (info.offset.x >= 100 && index > 0) handleLeftSwipe()
     if (info.offset.x < -100 && index < slides.length - maxSlides) handleRightSwipe()
@@ -70,7 +76,7 @@ export default function Carousel({ slides, weatherIndex, setWeatherIndex, classN
             const dotArr = []
 
             for (let i = 0; i < slides.length - maxSlides + 1; i++) {
-              dotArr.push(<button key={i} className={`transition-all ease-in-out ${i == index ? 'w-4 h-4 bg-blue-300 opacity-100' : 'w-2 h-2 bg-white opacity-50'} rounded-full`} onClick={() => setIndex(i)}></button>)
+              dotArr.push(<button key={i} className={`transition-all ease-in-out ${i == index ? 'w-4 h-4 bg-blue-300 opacity-100' : 'w-2 h-2 bg-white opacity-50'} rounded-full`} onClick={() => handleDotSwipe(i)}></button>)
             }
 
             return dotArr
