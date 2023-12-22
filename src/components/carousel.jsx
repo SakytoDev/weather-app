@@ -65,11 +65,11 @@ export default function Carousel({ slides, weatherIndex, setWeatherIndex, classN
           }
         })}
       </motion.div>
-      <div className='-mx-2 absolute inset-0 flex items-center justify-between invisible'>
-        <button className={`${index > 0 ? 'visible' : 'invisible'}`} onClick={() => handleLeftSwipe()}><img className='w-8 h-8 rotate-180 transition ease-in-out hover:scale-110 ' src={carouselArrow}/></button>
-        <button className={`${index < slides?.length - maxSlides ? 'visible' : 'invisible'}`} onClick={() => handleRightSwipe()}><img className='w-8 h-8 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
+      <div className='-mx-4 absolute inset-0 flex items-center justify-between invisible'>
+        <button className={`bg-zinc-900 rounded-full ${index > 0 ? 'visible' : 'invisible'}`} onClick={() => handleLeftSwipe()}><img className='w-8 h-8 rotate-180 transition ease-in-out hover:scale-110 ' src={carouselArrow}/></button>
+        <button className={`bg-zinc-900 rounded-full ${index < slides?.length - maxSlides ? 'visible' : 'invisible'}`} onClick={() => handleRightSwipe()}><img className='w-8 h-8 transition ease-in-out hover:scale-110' src={carouselArrow}/></button>
       </div>
-      <div className='absolute inset-0 flex items-end justify-center invisible'>
+      <div className='absolute -inset-7 flex items-end justify-center invisible'>
         { slides ?
         <div className='flex items-center gap-2 visible'>
           {(() => {

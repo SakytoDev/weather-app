@@ -92,7 +92,7 @@ function App() {
 
       <div className='h-full grid grid-rows-[auto,auto] grid-cols-3 overflow-hidden'>
         <motion.div className='h-fit m-5 col-span-3 lg:col-start-2 lg:col-span-1' layout>
-          <div className='p-5 bg-zinc-700 border-2 rounded-xl'>
+          <div className='p-5 bg-gradient-to-br from-gray-600 to-zinc-900 border-2 rounded-xl'>
             { loading 
             ?
             <div className='flex items-center justify-center gap-2'>
@@ -118,7 +118,10 @@ function App() {
             }
           </div>
         </motion.div>
-        <Carousel slides={weather?.daily} weatherIndex={index} setWeatherIndex={setWeatherIndex} className='m-5 grid col-span-3'/>
+        <div className='m-5 flex flex-col gap-4 col-span-3'>
+          <p className='text-2xl text-white font-medium font-mono self-center'>Прогноз на 7 дней:</p>
+          <Carousel slides={weather?.daily} weatherIndex={index} setWeatherIndex={setWeatherIndex} className='flex flex-col'/>
+        </div>
       </div>
     </>
   )
