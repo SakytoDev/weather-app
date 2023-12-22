@@ -118,10 +118,12 @@ function App() {
             }
           </div>
         </motion.div>
+        { weather ? 
         <div className='m-5 flex flex-col gap-4 col-span-3'>
           <p className='text-2xl text-white font-medium font-mono self-center'>Прогноз на 7 дней:</p>
-          <Carousel slides={weather?.daily} weatherIndex={index} setWeatherIndex={setWeatherIndex} className='flex flex-col'/>
+          <Carousel slides={weather.daily} weatherIndex={index} setWeatherIndex={setWeatherIndex} className='flex flex-col'/>
         </div>
+        : null }
       </div>
     </>
   )
