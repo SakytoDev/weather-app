@@ -2,7 +2,7 @@
 
 Application for viewing detailed weather in cities, with a forecast for the next 7 days.
 
-![image](https://github.com/SakytoDev/weather-app/assets/21197535/3e4265da-8303-446f-ae1e-2bd56803d582)
+![image](https://github.com/SakytoDev/weather-app/assets/21197535/a1698029-7686-40b7-a68c-43fb18d4d5f7)
 
 # How to use it?
 
