@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 import axios from 'axios';
@@ -10,7 +10,11 @@ import WeatherCard from './components/weathercard';
 import Spinner from './components/spinner';
 
 import { cities } from './assets/cities';
-import bg from './assets/background.jpg';
+
+import rain from './assets/backgrounds/rain.mp4';
+import snow from './assets/backgrounds/snow.mp4';
+import clouds from './assets/backgrounds/clouds.mp4';
+import clear from './assets/backgrounds/clear.mp4';
 
 function App() {
   const [weather, setWeather] = useState(null)
@@ -20,6 +24,8 @@ function App() {
   const [city, setCity] = useState(null)
 
   const [loading, setLoad] = useState(false)
+
+  const bgVideo = useRef()
 
   function handleChange(value) {
     setCity(value)
@@ -71,9 +77,18 @@ function App() {
     setWeather(null)
   }
 
+  useEffect(() => {
+    bgVideo.current?.load()
+  }, [weather?.daily[index].weather[0].main])
+
   return (
     <>
-      <img className='bg-zinc-800 absolute h-full w-full object-cover blur -z-[1]' src={bg}/>
+      <video ref={bgVideo} className='bg-zinc-800 absolute w-full h-full object-cover blur-sm -z-[1]' loop autoPlay muted>
+        { weather?.daily[index].weather[0].main == "Rain" ? <source src={rain} type='video/mp4'/> : null }
+        { weather?.daily[index].weather[0].main == "Snow" ? <source src={snow} type='video/mp4'/> : null }
+        { weather?.daily[index].weather[0].main == "Clouds" ? <source src={clouds} type='video/mp4'/> : null }
+        { weather?.daily[index].weather[0].main == "Clear" ? <source src={clear} type='video/mp4'/> : null }
+      </video>
 
       <div className='h-full grid grid-rows-[auto,auto] grid-cols-3 overflow-hidden'>
         <motion.div className='h-fit m-5 col-span-3 lg:col-start-2 lg:col-span-1' layout>
