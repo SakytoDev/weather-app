@@ -13,23 +13,23 @@ export default function WeatherCard({ weather, index }) {
   }
 
   return (
-    <div className='grid grid-rows-[auto,auto,auto,auto]'>
-      <div className='py-2 border-2 rounded-t-xl flex flex-col items-center'>
-        <p className='text-white font-bold font-mono text-3xl sm:text-4xl md:text-5xl lg:text-4xl 2xl:text-5xl'>{weather.name}</p>
+    <div className='grid grid-rows-[auto,auto,auto,auto] text-white'>
+      <div className='py-2 border-2 rounded-t-xl flex flex-col items-center font-mono'>
+        <p className='font-bold text-3xl sm:text-4xl md:text-5xl lg:text-4xl 2xl:text-5xl'>{weather.name}</p>
         <div className='flex flex-col items-center gap-1'>
-          <p className='text-white text-xl font-mono'>{DateTime.fromSeconds(weather.daily[index].dt).setLocale('ru').toFormat('cccc')}</p>
+          <p className='text-xl'>{DateTime.fromSeconds(weather.daily[index].dt).setLocale('ru').toFormat('cccc')}</p>
           <div className='flex gap-2'>
             <img className='bg-zinc-400 rounded-full w-7 h-7' src={`https://openweathermap.org/img/wn/${weather.daily[index].weather[0].icon}.png`}/>
-            <p className='text-white text-xl font-mono'>{weather.daily[index].weather[0].description}</p>
+            <p className='text-xl'>{weather.daily[index].weather[0].description}</p>
           </div>
         </div>
       </div>
-      <div>
-        <p className='mt-2 border-l-2 border-r-2 text-white text-center text-5xl font-bold'>{(weather.daily[index].temp.day).toFixed()}°C</p>
-        <p className='mb-2 border-l-2 border-r-2  text-white text-center font-mono'>По ощущениям: {(weather.daily[index].feels_like.day).toFixed()}°C</p>
+      <div className='py-2 border-l-2 border-r-2 text-center'>
+        <p className='text-5xl font-bold'>{(weather.daily[index].temp.day).toFixed()}°C</p>
+        <p>По ощущениям: {(weather.daily[index].feels_like.day).toFixed()}°C</p>
       </div>
       <div className='border-t-2 grid grid-cols-2'>
-        <div className='pl-2 border-2 border-t-0 rounded-bl-xl text-white font-medium flex flex-col justify-center'>
+        <div className='pl-2 border-2 border-t-0 rounded-bl-xl font-medium flex flex-col justify-center'>
           <div className='flex items-center gap-1'>
             <img className='w-7 h-7' src={pressure}/>
             <p>{(weather.daily[index].pressure * 0.75).toFixed()} мм рт. ст.</p>
@@ -39,7 +39,7 @@ export default function WeatherCard({ weather, index }) {
             <p>{weather.daily[index].humidity}%</p>
           </div>
         </div>
-        <div className='p-2 border-2 border-t-0 rounded-br-xl text-white font-medium flex gap-1'>
+        <div className='p-2 border-2 border-t-0 border-l-0 rounded-br-xl font-medium flex gap-1'>
           <img className='w-7 h-7' src={wind}/>
           <div>
             <p>{(weather.daily[index].wind_speed).toFixed(1)} м/с</p>

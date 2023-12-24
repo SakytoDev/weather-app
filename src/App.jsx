@@ -20,7 +20,7 @@ function App() {
   const [weather, setWeather] = useState(null)
   const [index, setWeatherIndex] = useState(0)
 
-  const [location, setLocation] = useState({ error: 'Разрешить использовать своё местоположение', disabled: false })
+  const [location, setLocation] = useState({ error: 'Разрешить использование моего местоположения', disabled: false })
   const [city, setCity] = useState(null)
 
   const [loading, setLoad] = useState(false)
