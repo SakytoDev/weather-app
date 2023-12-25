@@ -13,8 +13,8 @@ import eve from '../assets/weathercard/eve.png';
 import night from '../assets/weathercard/night.png';
 
 export default function WeatherCard({ weather, index }) {
-  const [typeIndex, setTypeIndex] = useState(0)
-  const dayTypes = [ 
+  const [timeIndex, setTimeIndex] = useState(0)
+  const dayTimes = [ 
     { 
       icon: morn,
       local: 'Утром:',
@@ -48,12 +48,12 @@ export default function WeatherCard({ weather, index }) {
   }
 
   function changeDayType() {
-    if (typeIndex == dayTypes.length - 1) setTypeIndex(0)
-    else setTypeIndex(prev => prev + 1)
+    if (timeIndex == dayTimes.length - 1) setTimeIndex(0)
+    else setTimeIndex(prev => prev + 1)
   }
 
   return (
-    <div className='grid grid-rows-[auto,auto,auto,auto] text-white'>
+    <div className='text-white'>
       <div className='py-2 border-2 rounded-t-xl flex flex-col items-center font-mono'>
         <p className='font-bold text-3xl sm:text-4xl md:text-5xl lg:text-4xl 2xl:text-5xl'>{weather.name}</p>
         <div className='flex flex-col items-center gap-1'>
@@ -66,12 +66,12 @@ export default function WeatherCard({ weather, index }) {
       </div>
       <div className='p-2 border-l-2 border-r-2 flex'>
         <AnimatePresence mode='wait'>
-          { dayTypes.map((item, index) => {
-            if (index == typeIndex) {
+          { dayTimes.map((item, index) => {
+            if (index == timeIndex) {
               return (
                 <motion.div key={index} initial={{ x: 10, opacity: 0}} animate={{ x: 0, opacity: 1 }} exit={{ x: -10, opacity: 0 }} transition={{ ease: 'easeInOut', duration: 0.2 }} className='ml-2'>
-                  <p className='text-xl font-bold'>{dayTypes[typeIndex].local} {(dayTypes[typeIndex].temp).toFixed()}°C</p>
-                  <p>По ощущениям: {(dayTypes[typeIndex].feels_like).toFixed()}°C</p>
+                  <p className='text-xl font-bold'>{dayTimes[timeIndex].local} {(dayTimes[timeIndex].temp).toFixed()}°C</p>
+                  <p>По ощущениям: {(dayTimes[timeIndex].feels_like).toFixed()}°C</p>
                 </motion.div>
               )
             }
@@ -79,8 +79,8 @@ export default function WeatherCard({ weather, index }) {
         </AnimatePresence>
         <button className='px-2 border-2 border-indigo-500 rounded-xl ml-auto transition ease-in-out hover:bg-indigo-600' onClick={() => changeDayType()}>
           <AnimatePresence mode='wait'>
-            { dayTypes.map((item, index) => {
-              if (index == typeIndex) {
+            { dayTimes.map((item, index) => {
+              if (index == timeIndex) {
                 return <motion.img
                   key={index}
                   initial={{ y: 5, opacity: 0 }} 
@@ -88,7 +88,7 @@ export default function WeatherCard({ weather, index }) {
                   exit={{ y: -5, opacity: 0 }} 
                   transition={{ ease: 'easeInOut', duration: 0.2 }}
                   className='w-8 h-8' 
-                  src={dayTypes[typeIndex].icon}/>
+                  src={dayTimes[timeIndex].icon}/>
               }
             })}
           </AnimatePresence>
